@@ -124,7 +124,7 @@ if has("gui_running")
 		set gfn=Bitstream_Vera_Sans_Mono:h14
 		autocmd GUIEnter * simalt ~x
 	else
-		set gfn=DejaVu_Sans_Mono_for_Powerline:h16
+		set gfn=DejaVu_Sans_Mono_for_Powerline:h18
 		set transparency=7
   endif
 endif
