@@ -45,6 +45,9 @@ Plug 'othree/xml.vim', { 'for': 'xml' }
 " HTML/CSS
 Plug 'mattn/emmet-vim', { 'for': [ 'html', 'css' ] }
 
+" Jade
+Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
+
 " Javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
@@ -210,6 +213,7 @@ noremap <C-l> <C-w>l
 " Filetype
 "*****************************************************************************
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufNewFile,BufReadPost *.jade set filetype=jade
 
 "*****************************************************************************
 " File management
