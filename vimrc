@@ -8,10 +8,9 @@ endif
 Plug 'Lokaltog/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'bronson/vim-trailing-whitespace'
+Plug 'junegunn/vim-easy-align'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'jiangmiao/auto-pairs'
-
-" Code Completion
-Plug 'Shougo/neocomplcache.vim'
 
 " File management
 " Unite
@@ -19,12 +18,19 @@ Plug 'Shougo/neocomplcache.vim'
 "   you have to go to vimproc.vim and do a ./make
 Plug 'Shougo/vimproc.vim'
 Plug 'Shougo/unite.vim'
+Plug 'rking/ag.vim'
 
 " Visual
 Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'kien/rainbow_parentheses.vim'
+
+" Code Completion
+Plug 'Shougo/neocomplcache.vim'
+
+" Syntax Checker
+Plug 'scrooloose/syntastic'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -43,15 +49,17 @@ Plug 'mattn/emmet-vim', { 'for': [ 'html', 'css' ] }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
 " Scala
-Plug 'vim-scala', { 'for': 'scala' }
+Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 
 call plug#end()
 
 "*****************************************************************************
 " Basic Setup
 "*****************************************************************************"
-" Unleash all VIM power
 set nocompatible
+set viminfo='20,\"50
+set history=10000
+set visualbell
 
 " Fix backspace indent
 set backspace=indent,eol,start
@@ -67,6 +75,12 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 
+" indent
+set autoindent
+set smartindent
+set cindent
+set cinoptions=(0,u0,U0
+
 " Map leader to ,
 let mapleader='-'
 
@@ -78,11 +92,6 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
-
-" Encoding
-set bomb
-set ttyfast
-set binary
 
 " Directories for swp files
 set nobackup
@@ -143,9 +152,9 @@ let g:airline#extension#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tagbar#enabled = 1
-"let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#hunks#enabled = 1
+"let g:airline#extensions#tagbar#enabled = 1
+"let g:airline#extensions#syntastic#enabled = 1
 
 " Rainbow parenthesis options
 let g:rbpt_colorpairs = [
@@ -190,6 +199,14 @@ cab W w
 cab Q q
 
 "*****************************************************************************
+" Key Mapping
+"*****************************************************************************
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
+"*****************************************************************************
 " Filetype
 "*****************************************************************************
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
@@ -214,22 +231,34 @@ nnoremap <space>y :split<cr>:<C-u>Unite history/yank<cr>
 " reset not it is <C-l> normally
 :nnoremap <space>r <Plug>(unite_restart)
 
+" --- type ¡Æ to search the word in all files in the current dir
+nmap <Leader>ag :Ag <c-r>=expand("<cword>")<cr><cr>
+
 "*****************************************************************************
 " Auto Completion
 "*****************************************************************************
 let g:acp_enableAtStartup = 0
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_dictionary_filetype_lists = {
+if has('win32')
+  let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/_viminfo'
+    \ }
+else
+  let g:neocomplcache_dictionary_filetype_lists = {
     \ 'default' : '',
     \ 'vimshell' : $HOME.'/.vimshell_hist'
     \ }
+endif
+
 inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
     return neocomplcache#smart_close_popup() . "\<CR>"
 endfunction
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 "*****************************************************************************
 " Syntax Checker
@@ -238,9 +267,11 @@ endfunction
 let g:syntastic_mode_map = {
 	\ "mode": "active",
 	\ "active_filetypes": [],
-	\ "passive_filetypes": ["js", "scala"] }
+	\ "passive_filetypes": ["javascript", "scala"] }
 let g:syntastic_auto_loc_list=1
 let g:syntastic_always_populate_loc_list=1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " scala
 let g:syntastic_scala_checkers=['fsc']
@@ -266,3 +297,6 @@ map <Leader>k <Plug>(easymotion-k)
 map <Leader>n <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0
+
+" easy-align
+vnoremap <silent> <Enter> :EasyAlign<cr>
