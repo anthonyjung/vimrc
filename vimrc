@@ -42,6 +42,9 @@ Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 " XML
 Plug 'othree/xml.vim', { 'for': 'xml' }
 
+" JSON
+Plug 'elzr/vim-json', { 'for': 'json' }
+
 " HTML/CSS
 Plug 'mattn/emmet-vim', { 'for': [ 'html', 'css' ] }
 
@@ -176,10 +179,10 @@ let g:rbpt_colorpairs = [
 	\ ['darkred',     'firebrick3'],
 	\ ]
 
-autocmd BufEnter *.js,*.scala RainbowParenthesesActivate
-autocmd BufEnter *.js,*.scala RainbowParenthesesLoadRound
-autocmd BufEnter *.js,*.scala RainbowParenthesesLoadSquare
-autocmd BufEnter *.js,*.scala RainbowParenthesesLoadBraces
+autocmd BufEnter *.json,*.js,*.scala RainbowParenthesesActivate
+autocmd BufEnter *.json,*.js,*.scala RainbowParenthesesLoadRound
+autocmd BufEnter *.json,*.js,*.scala RainbowParenthesesLoadSquare
+autocmd BufEnter *.json,*.js,*.scala RainbowParenthesesLoadBraces
 
 " Use modeline overrides
 set modeline
@@ -209,7 +212,18 @@ noremap <C-l> <C-w>l
 "*****************************************************************************
 " Filetype
 "*****************************************************************************
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd! BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd! BufRead,BufNewFile *.json set filetype=json
+augroup json_autocmd
+  autocmd!
+  autocmd FileType json set autoindent
+  autocmd FileType json set formatoptions=tcq21
+  autocmd FileType json set textwidth=78 shiftwidth=2
+  autocmd FileType json set softtabstop=2 tabstop=8
+  autocmd FileType json set expandtab
+  autocmd FileType json set foldmethod=syntax
+augroup END
+
 
 "*****************************************************************************
 " File management
@@ -294,7 +308,7 @@ map N <Plug>(easymotion-prev)
 map <Leader>l <Plug>(easymotion-lineforward)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
-map <Leader>n <Plug>(easymotion-linebackward)
+map <Leader>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0
 
