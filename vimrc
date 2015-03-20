@@ -48,6 +48,9 @@ Plug 'elzr/vim-json', { 'for': 'json' }
 " HTML/CSS
 Plug 'mattn/emmet-vim', { 'for': [ 'html', 'css' ] }
 
+" Jade
+Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
+
 " Javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
@@ -214,6 +217,7 @@ noremap <C-l> <C-w>l
 "*****************************************************************************
 autocmd! BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd! BufRead,BufNewFile *.json set filetype=json
+autocmd! BufNewFile,BufReadPost *.jade set filetype=jade
 augroup json_autocmd
   autocmd!
   autocmd FileType json set autoindent
@@ -223,7 +227,6 @@ augroup json_autocmd
   autocmd FileType json set expandtab
   autocmd FileType json set foldmethod=syntax
 augroup END
-
 
 "*****************************************************************************
 " File management
