@@ -142,11 +142,11 @@ set titlestring=%F
 " solarized
 try
   colorscheme solarized
+  call togglebg#map("<F12>")
 catch
 endtry
 
 set background=dark
-call togglebg#map("<F12>")
 
 " Status bar
 set laststatus=2
