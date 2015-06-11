@@ -22,6 +22,7 @@ Plug 'rking/ag.vim'
 
 " Visual
 Plug 'altercation/vim-colors-solarized'
+Plug 'sickill/vim-monokai'
 Plug 'bling/vim-airline'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'kien/rainbow_parentheses.vim'
@@ -44,6 +45,9 @@ Plug 'othree/xml.vim', { 'for': 'xml' }
 
 " JSON
 Plug 'elzr/vim-json', { 'for': 'json' }
+
+" CPP
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 
 " HTML/CSS
 Plug 'mattn/emmet-vim', { 'for': [ 'html', 'css' ] }
@@ -139,20 +143,17 @@ set title
 set titleold="Terminal"
 set titlestring=%F
 
-" solarized
+" colorscheme
 try
-  colorscheme solarized
-  call togglebg#map("<F12>")
+  colorscheme monokai
 catch
 endtry
-
-set background=dark
 
 " Status bar
 set laststatus=2
 
 " airline
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'molokai'
 let g:airline_powerline_fonts = 1
 let g:airline#extension#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -317,3 +318,7 @@ let g:EasyMotion_startofline = 0
 
 " easy-align
 vnoremap <silent> <Enter> :EasyAlign<cr>
+
+" vim-cpp-enhanced-highlight
+let g:cpp_class_scope_highlight = 1
+let g:cpp_experimental_template_highlight = 1
