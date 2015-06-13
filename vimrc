@@ -22,7 +22,8 @@ Plug 'rking/ag.vim'
 
 " Visual
 "Plug 'altercation/vim-colors-solarized'
-Plug 'tomasr/molokai'
+Plug 'altercation/vim-colors-solarized'
+Plug 'sickill/vim-monokai'
 Plug 'bling/vim-airline'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'kien/rainbow_parentheses.vim'
@@ -43,8 +44,11 @@ Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 " XML
 Plug 'othree/xml.vim', { 'for': 'xml' }
 
+" JSON
+Plug 'elzr/vim-json', { 'for': 'json' }
+
 " CPP
-Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 
 " HTML/CSS
 Plug 'mattn/emmet-vim', { 'for': [ 'html', 'css' ] }
@@ -142,14 +146,9 @@ set titlestring=%F
 
 " colorscheme
 try
-  colorscheme molokai
-  let g:molokai_original = 1
-  let g:rehash256 = 1
+  colorscheme monokai
 catch
 endtry
-
-set background=dark
-"call togglebg#map("<F12>")
 
 " Status bar
 set laststatus=2
@@ -185,10 +184,10 @@ let g:rbpt_colorpairs = [
 	\ ['darkred',     'firebrick3'],
 	\ ]
 
-autocmd BufEnter *.js,*.scala RainbowParenthesesActivate
-autocmd BufEnter *.js,*.scala RainbowParenthesesLoadRound
-autocmd BufEnter *.js,*.scala RainbowParenthesesLoadSquare
-autocmd BufEnter *.js,*.scala RainbowParenthesesLoadBraces
+autocmd BufEnter *.json,*.js,*.scala RainbowParenthesesActivate
+autocmd BufEnter *.json,*.js,*.scala RainbowParenthesesLoadRound
+autocmd BufEnter *.json,*.js,*.scala RainbowParenthesesLoadSquare
+autocmd BufEnter *.json,*.js,*.scala RainbowParenthesesLoadBraces
 
 " Use modeline overrides
 set modeline
@@ -218,8 +217,18 @@ noremap <C-l> <C-w>l
 "*****************************************************************************
 " Filetype
 "*****************************************************************************
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-autocmd BufNewFile,BufReadPost *.jade set filetype=jade
+autocmd! BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd! BufRead,BufNewFile *.json set filetype=json
+autocmd! BufNewFile,BufReadPost *.jade set filetype=jade
+augroup json_autocmd
+  autocmd!
+  autocmd FileType json set autoindent
+  autocmd FileType json set formatoptions=tcq21
+  autocmd FileType json set textwidth=78 shiftwidth=2
+  autocmd FileType json set softtabstop=2 tabstop=8
+  autocmd FileType json set expandtab
+  autocmd FileType json set foldmethod=syntax
+augroup END
 
 "*****************************************************************************
 " File management
@@ -304,7 +313,7 @@ map N <Plug>(easymotion-prev)
 map <Leader>l <Plug>(easymotion-lineforward)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
-map <Leader>n <Plug>(easymotion-linebackward)
+map <Leader>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0
 
