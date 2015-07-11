@@ -220,7 +220,7 @@ noremap <C-l> <C-w>l
 autocmd! BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd! BufRead,BufNewFile *.json set filetype=json
 autocmd! BufNewFile,BufReadPost *.jade set filetype=jade
-autocmd BufNewFile,BufReadPost CMakeLists.txt set filetype=cmake
+autocmd! BufNewFile,BufReadPost CMakeLists.txt set filetype=cmake
 augroup json_autocmd
   autocmd!
   autocmd FileType json set autoindent
@@ -287,7 +287,7 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 let g:syntastic_mode_map = {
 	\ "mode": "active",
 	\ "active_filetypes": [],
-	\ "passive_filetypes": ["javascript", "scala"] }
+	\ "passive_filetypes": ["html", "javascript", "scala"] }
 let g:syntastic_auto_loc_list=1
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_check_on_open = 1
