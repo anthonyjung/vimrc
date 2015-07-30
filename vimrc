@@ -117,6 +117,8 @@ if !has('win32')
 endif
 
 set wildmode=list:longest,list:full
+set lines=46
+set columns=240
 
 "*****************************************************************************
 " Visual Settigns
