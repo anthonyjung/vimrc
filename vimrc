@@ -52,6 +52,10 @@ Plug 'elzr/vim-json', { 'for': 'json' }
 " CPP
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 
+" Go lang
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'garyburd/go-explorer', { 'for': 'go' }
+
 " HTML/CSS
 Plug 'mattn/emmet-vim', { 'for': [ 'html', 'css' ] }
 
@@ -61,8 +65,14 @@ Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 " Javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
+" Typescript
+Plug 'leafgarland/typescript-vim'
+
 " Scala
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
+
+" Dockerfile
+Plug 'ekalinin/Dockerfile.vim'
 
 call plug#end()
 
@@ -343,3 +353,28 @@ vnoremap <silent> <Enter> :EasyAlign<cr>
 " vim-cpp-enhanced-highlight
 let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_template_highlight = 1
+
+" vim-go
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+au FileType go nmap <leader>ds <Plug>(go-def-split)
+au FileType go nmap <leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <leader>dt <Plug>(go-def-tab)
+
+au FileType go nmap <leader>gd <Plug>(go-doc)
+au FileType go nmap <leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <leader>gb <Plug>(go-doc-browser)
+
+au FileType go nmap <leader>s <Plug>(go-implements)
+au FileType go nmap <leader>i <Plug>(go-info)
+au FileType go nmap <leader>e <Plug>(go-rename)
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
