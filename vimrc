@@ -5,12 +5,14 @@ else
 endif
 
 " General
+Plug 'scrooloose/nerdtree'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'junegunn/vim-easy-align'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'majutsushi/tagbar'
 
 " File management
 " Unite
@@ -21,6 +23,7 @@ Plug 'Shougo/unite.vim'
 Plug 'rking/ag.vim'
 
 " Visual
+"Plug 'altercation/vim-colors-solarized'
 Plug 'altercation/vim-colors-solarized'
 Plug 'sickill/vim-monokai'
 Plug 'bling/vim-airline'
@@ -49,6 +52,10 @@ Plug 'elzr/vim-json', { 'for': 'json' }
 " CPP
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 
+" Go lang
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'garyburd/go-explorer', { 'for': 'go' }
+
 " HTML/CSS
 Plug 'mattn/emmet-vim'
 
@@ -58,8 +65,14 @@ Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 " Javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
+" Typescript
+Plug 'leafgarland/typescript-vim'
+
 " Scala
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
+
+" Dockerfile
+Plug 'ekalinin/Dockerfile.vim'
 
 call plug#end()
 
@@ -114,6 +127,8 @@ if !has('win32')
 endif
 
 set wildmode=list:longest,list:full
+set lines=46
+set columns=240
 
 "*****************************************************************************
 " Visual Settigns
@@ -219,6 +234,7 @@ noremap <C-l> <C-w>l
 autocmd! BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd! BufRead,BufNewFile *.json set filetype=json
 autocmd! BufNewFile,BufReadPost *.jade set filetype=jade
+autocmd! BufNewFile,BufReadPost CMakeLists.txt set filetype=cmake
 augroup json_autocmd
   autocmd!
   autocmd FileType json set autoindent
@@ -283,9 +299,9 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 "*****************************************************************************
 " syntastic general
 let g:syntastic_mode_map = {
-	\ "mode": "active",
+	\ "mode": "passive",
 	\ "active_filetypes": [],
-	\ "passive_filetypes": ["javascript", "scala"] }
+	\ "passive_filetypes": ["html", "javascript", "scala"] }
 let g:syntastic_auto_loc_list=1
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_check_on_open = 1
@@ -300,6 +316,21 @@ nmap <Leader>sc :SyntasticCheck<CR>
 "*****************************************************************************
 " Plugins
 "*****************************************************************************
+" nerdtree
+let g:NERDTreeChDirMode=2
+let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
+let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
+let g:NERDTreeShowBookmarks=1
+let g:nerdtree_tabs_focus_on_files=1
+let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
+let g:NERDTreeWinSize = 20
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
+nnoremap <silent> <F2> :NERDTreeFind<CR>
+noremap <F3> :NERDTreeToggle<CR>
+
+" tagbar
+nmap <F8> :TagbarToggle<CR>
+
 " easymotion
 "map <Leader> <Plug>(easymotion-prefix)
 
@@ -326,4 +357,29 @@ let g:cpp_experimental_template_highlight = 1
 " emmet-vim
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
+
+" vim-go
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+au FileType go nmap <leader>ds <Plug>(go-def-split)
+au FileType go nmap <leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <leader>dt <Plug>(go-def-tab)
+
+au FileType go nmap <leader>gd <Plug>(go-doc)
+au FileType go nmap <leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <leader>gb <Plug>(go-doc-browser)
+
+au FileType go nmap <leader>s <Plug>(go-implements)
+au FileType go nmap <leader>i <Plug>(go-info)
+au FileType go nmap <leader>e <Plug>(go-rename)
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
 
