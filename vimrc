@@ -50,7 +50,7 @@ Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 
 " HTML/CSS
-Plug 'mattn/emmet-vim', { 'for': [ 'html', 'css' ] }
+Plug 'mattn/emmet-vim'
 
 " Jade
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
@@ -322,3 +322,8 @@ vnoremap <silent> <Enter> :EasyAlign<cr>
 " vim-cpp-enhanced-highlight
 let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_template_highlight = 1
+
+" emmet-vim
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
