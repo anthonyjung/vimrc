@@ -57,7 +57,7 @@ Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'garyburd/go-explorer', { 'for': 'go' }
 
 " HTML/CSS
-Plug 'mattn/emmet-vim', { 'for': [ 'html', 'css' ] }
+Plug 'mattn/emmet-vim'
 
 " Jade
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
@@ -357,6 +357,10 @@ vnoremap <silent> <Enter> :EasyAlign<cr>
 " vim-cpp-enhanced-highlight
 let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_template_highlight = 1
+
+" emmet-vim
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
 
 " vim-go
 au FileType go nmap <leader>r <Plug>(go-run)
