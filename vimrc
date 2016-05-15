@@ -23,12 +23,12 @@ Plug 'Shougo/unite.vim'
 Plug 'rking/ag.vim'
 
 " Visual
-"Plug 'altercation/vim-colors-solarized'
 Plug 'altercation/vim-colors-solarized'
 Plug 'sickill/vim-monokai'
 Plug 'bling/vim-airline'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'zenorocha/dracula-theme'
 
 " Code Completion
 Plug 'Shougo/neocomplcache.vim'
@@ -67,6 +67,10 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
 " Typescript
 Plug 'leafgarland/typescript-vim'
+
+" Python
+Plug 'hdima/python-syntax', { 'for': 'python' }
+Plug 'klen/python-mode', { 'for': 'python' }
 
 " Scala
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
@@ -160,7 +164,7 @@ set titlestring=%F
 
 " colorscheme
 try
-  colorscheme monokai
+  colorscheme dracula
 catch
 endtry
 
@@ -378,3 +382,4 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
+let g:go_fmt_command = "goimports"
